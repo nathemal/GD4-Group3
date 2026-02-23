@@ -1,0 +1,59 @@
+# Unreal Engine files
+**/Binaries/
+**/Build/
+**/DerivedDataCache/
+**/Intermediate/
+**/Saved/
+**/.vs/
+**/.idea/
+
+# Built data for maps
+*_BuiltData.uasset
+
+# Configuration files that may contain sensitive info - uncomment what you want to ignore
+#Config/DefaultEngine.ini
+#Config/DefaultGame.ini
+#Config/DefaultInput.ini
+
+# Visual Studio files
+*.VC.opendb
+*.VC.db
+*.opensdf
+*.sdf
+*.suo
+*.vcxproj.user
+*.xcodeproj
+*.xcworkspace
+*.sln
+.vs/
+
+# Binary Files
+*.dll
+*.pdb
+*.lib
+
+# Compiled assets
+*.pch
+
+# Logs and temp files
+*.log
+Logs/
+**/Logs/
+*.bak
+
+# OS generated files
+.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+[Tt]humbs.db
+
+# Content folder exceptions (if you want to track content)
+!Content/**/*.uasset
+!Content/**/*.umap
+
+
+# Optional: if using marketplace content
+**/Marketplace/
