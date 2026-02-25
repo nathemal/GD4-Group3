@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "GD4_Group4Character.h"
+#include "GD4_Group3Character.h"
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -10,9 +10,9 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
-#include "GD4_Group4.h"
+#include "GD4_Group3.h"
 
-AGD4_Group4Character::AGD4_Group4Character()
+AGD4_Group3Character::AGD4_Group3Character()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -50,7 +50,7 @@ AGD4_Group4Character::AGD4_Group4Character()
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
 }
 
-void AGD4_Group4Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AGD4_Group3Character::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
@@ -60,19 +60,19 @@ void AGD4_Group4Character::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
 		// Moving
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AGD4_Group4Character::Move);
-		EnhancedInputComponent->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &AGD4_Group4Character::Look);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AGD4_Group3Character::Move);
+		EnhancedInputComponent->BindAction(MouseLookAction, ETriggerEvent::Triggered, this, &AGD4_Group3Character::Look);
 
 		// Looking
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AGD4_Group4Character::Look);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AGD4_Group3Character::Look);
 	}
 	else
 	{
-		UE_LOG(LogGD4_Group4, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
+		UE_LOG(LogGD4_Group3, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
 	}
 }
 
-void AGD4_Group4Character::Move(const FInputActionValue& Value)
+void AGD4_Group3Character::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D MovementVector = Value.Get<FVector2D>();
@@ -81,7 +81,7 @@ void AGD4_Group4Character::Move(const FInputActionValue& Value)
 	DoMove(MovementVector.X, MovementVector.Y);
 }
 
-void AGD4_Group4Character::Look(const FInputActionValue& Value)
+void AGD4_Group3Character::Look(const FInputActionValue& Value)
 {
 	// input is a Vector2D
 	FVector2D LookAxisVector = Value.Get<FVector2D>();
@@ -90,7 +90,7 @@ void AGD4_Group4Character::Look(const FInputActionValue& Value)
 	DoLook(LookAxisVector.X, LookAxisVector.Y);
 }
 
-void AGD4_Group4Character::DoMove(float Right, float Forward)
+void AGD4_Group3Character::DoMove(float Right, float Forward)
 {
 	if (GetController() != nullptr)
 	{
@@ -110,7 +110,7 @@ void AGD4_Group4Character::DoMove(float Right, float Forward)
 	}
 }
 
-void AGD4_Group4Character::DoLook(float Yaw, float Pitch)
+void AGD4_Group3Character::DoLook(float Yaw, float Pitch)
 {
 	if (GetController() != nullptr)
 	{
@@ -120,13 +120,13 @@ void AGD4_Group4Character::DoLook(float Yaw, float Pitch)
 	}
 }
 
-void AGD4_Group4Character::DoJumpStart()
+void AGD4_Group3Character::DoJumpStart()
 {
 	// signal the character to jump
 	Jump();
 }
 
-void AGD4_Group4Character::DoJumpEnd()
+void AGD4_Group3Character::DoJumpEnd()
 {
 	// signal the character to stop jumping
 	StopJumping();

@@ -1,15 +1,19 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 
-#include "GD4_Group4PlayerController.h"
+#include "Variant_Combat/CombatPlayerController.h"
 #include "EnhancedInputSubsystems.h"
-#include "Engine/LocalPlayer.h"
 #include "InputMappingContext.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/PlayerStart.h"
+#include "CombatCharacter.h"
+#include "Engine/LocalPlayer.h"
+#include "Engine/World.h"
 #include "Blueprint/UserWidget.h"
-#include "GD4_Group4.h"
+#include "GD4_Group3.h"
 #include "Widgets/Input/SVirtualJoystick.h"
 
-void AGD4_Group4PlayerController::BeginPlay()
+void ACombatPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -26,21 +30,21 @@ void AGD4_Group4PlayerController::BeginPlay()
 
 		} else {
 
-			UE_LOG(LogGD4_Group4, Error, TEXT("Could not spawn mobile controls widget."));
+			UE_LOG(LogGD4_Group3, Error, TEXT("Could not spawn mobile controls widget."));
 
 		}
 
 	}
 }
 
-void AGD4_Group4PlayerController::SetupInputComponent()
+void ACombatPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
 	// only add IMCs for local player controllers
 	if (IsLocalPlayerController())
 	{
-		// Add Input Mapping Contexts
+		// add the input mapping context
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
 		{
 			for (UInputMappingContext* CurrentContext : DefaultMappingContexts)
@@ -60,7 +64,31 @@ void AGD4_Group4PlayerController::SetupInputComponent()
 	}
 }
 
-bool AGD4_Group4PlayerController::ShouldUseTouchControls() const
+void ACombatPlayerController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
+
+	// subscribe to the pawn's OnDestroyed delegate
+	InPawn->OnDestroyed.AddDynamic(this, &ACombatPlayerController::OnPawnDestroyed);
+}
+
+void ACombatPlayerController::SetRespawnTransform(const FTransform& NewRespawn)
+{
+	// save the new respawn transform
+	RespawnTransform = NewRespawn;
+}
+
+void ACombatPlayerController::OnPawnDestroyed(AActor* DestroyedActor)
+{
+	// spawn a new character at the respawn transform
+	if (ACombatCharacter* RespawnedCharacter = GetWorld()->SpawnActor<ACombatCharacter>(CharacterClass, RespawnTransform))
+	{
+		// possess the character
+		Possess(RespawnedCharacter);
+	}
+}
+
+bool ACombatPlayerController::ShouldUseTouchControls() const
 {
 	// are we on a mobile platform? Should we force touch?
 	return SVirtualJoystick::ShouldDisplayTouchInterface() || bForceTouchControls;

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "GD4_Group4PlayerController.generated.h"
+#include "GD4_Group3PlayerController.generated.h"
 
 class UInputMappingContext;
 class UUserWidget;
@@ -14,7 +14,7 @@ class UUserWidget;
  *  Manages input mappings
  */
 UCLASS(abstract)
-class AGD4_Group4PlayerController : public APlayerController
+class AGD4_Group3PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	

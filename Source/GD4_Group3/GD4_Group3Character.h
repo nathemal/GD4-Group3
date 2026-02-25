@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "GD4_Group4Character.generated.h"
+#include "GD4_Group3Character.generated.h"
 
 class USpringArmComponent;
 class UCameraComponent;
@@ -19,7 +19,7 @@ DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
  *  Implements a controllable orbiting camera
  */
 UCLASS(abstract)
-class AGD4_Group4Character : public ACharacter
+class AGD4_Group3Character : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -52,7 +52,7 @@ protected:
 public:
 
 	/** Constructor */
-	AGD4_Group4Character();	
+	AGD4_Group3Character();	
 
 protected:
 

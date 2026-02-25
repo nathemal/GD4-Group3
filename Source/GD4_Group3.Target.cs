@@ -3,13 +3,13 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
 
-public class GD4_Group4EditorTarget : TargetRules
+public class GD4_Group3Target : TargetRules
 {
-	public GD4_Group4EditorTarget(TargetInfo Target) : base(Target)
+	public GD4_Group3Target(TargetInfo Target) : base(Target)
 	{
-		Type = TargetType.Editor;
+		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V6;
 		IncludeOrderVersion = EngineIncludeOrderVersion.Unreal5_7;
-		ExtraModuleNames.Add("GD4_Group4");
+		ExtraModuleNames.Add("GD4_Group3");
 	}
 }
