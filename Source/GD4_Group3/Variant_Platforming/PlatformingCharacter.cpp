@@ -51,7 +51,7 @@ APlatformingCharacter::APlatformingCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2500.0f;
 	GetCharacterMovement()->PerchRadiusThreshold = 15.0f;
 
-	GetCharacterMovement()->JumpZVelocity = 350.0f;
+	GetCharacterMovement()->JumpZVelocity = 10.0f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 750.0f;
 	GetCharacterMovement()->AirControl = 1.0f;
 
